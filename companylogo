@@ -1,0 +1,83 @@
+import math
+import collections
+
+s = sorted(input().strip())
+s_counter = collections.Counter(s).most_common()
+
+s_counter = sorted(s_counter, key=lambda x: (x[1] * -1, x[0]))
+for i in range(0, 3):
+    print(s_counter[i][0], s_counter[i][1])
+
+def convert(s_counter):
+    return tuple(i for i in s_counter)
+print(convert(s_counter))
+def Extract(s_counter):
+    return [item[0] for item in s_counter]
+x=Extract(s_counter)
+print(x)
+
+#GUI
+
+import collections
+import turtle
+
+import tkinter as tk
+from tkinter import messagebox
+
+def on_yes_click():
+    messagebox.showinfo("Response", "You clicked Yes!")
+    root.destroy()
+
+def on_no_click():
+    messagebox.showinfo("Response", "You clicked No!")
+    root.destroy()
+
+root = tk.Tk()
+root.title("Logo Creation")
+
+prompt_label = tk.Label(root, text="Do you want to create a logo?", padx=20, pady=20)
+prompt_label.pack()
+
+yes_button = tk.Button(root, text="Yes", command=on_yes_click)
+yes_button.pack(side=tk.LEFT, padx=10)
+
+no_button = tk.Button(root, text="No", command=on_no_click)
+no_button.pack(side=tk.RIGHT, padx=10)
+
+root.mainloop()
+
+
+def create_logo(top_characters):
+    myPen = turtle.Turtle()
+    myPen.shape("turtle")
+    myPen.speed(5)
+    
+    turtle_x = -60  
+    turtle_y = 40
+    
+    
+    for char in top_characters:
+        myPen.penup()
+        myPen.goto(turtle_x, turtle_y)
+        myPen.pendown()
+        myPen.color("#556B2F")
+        myPen.fillcolor("#556B2F")
+        myPen.begin_fill()
+        for _ in range(4):
+            myPen.forward(40)
+            myPen.left(90)
+        myPen.end_fill()
+        myPen.penup()
+        myPen.goto(turtle_x + 20, turtle_y + 10)
+        myPen.color("white")
+        myPen.write(char, font=("Arial", 20, "bold"))
+        
+        myPen.goto(26, 105)
+        turtle_x += 60  
+input_string = x
+s_counter = collections.Counter(input_string).most_common()
+top_characters = [item[0] for item in s_counter[:3]]
+window = turtle.Screen()
+window.bgcolor("#8B0A50")
+create_logo(top_characters)
+turtle.done()
